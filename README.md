@@ -16,11 +16,15 @@ This project provides a RESTful API for managing user authentication, blog creat
 
 ## Features
 
-- **Product Management**: Create, update, delete, and fetch bicycle details.
-- **Order Management**: Place and validate orders with automatic inventory updates.
-- **Validation**: Schema validation using Zod to ensure request data integrity.
-- **Database**: MongoDB integration with Mongoose models and schema hooks.
-- **Error Handling**: Middleware-based error handling for consistent API responses.
+- **User Management**: Register, log in, and manage user roles (Admin and User) with secure authentication.
+- **Blog Management**:  Create, update, delete, and fetch personal blog posts for users. Admins can delete any blog and manage user statuses.
+- **Role-Based Access Control**:  Differentiated access for Admin and User roles, ensuring proper permissions for blog actions.
+- **Search, Sort, and Filter**: Advanced search, sorting, and filtering functionalities for retrieving blogs based on title, content, and author.
+- **Public Blog API**: Public API endpoints to fetch blogs with optional search and filter capabilities.
+- **Error Handling**: Middleware-based error handling with standardized responses for validation, authentication, and authorization errors.
+- **Database Integration**: MongoDB with Mongoose for managing user and blog data, including schema validation and hooks.
+- **Token-Based Authentication**:  JWT-based authentication for secured API access and role validation.
+- **Admin Actions**: Admin privileges for blocking users and deleting any blog, with proper role-based access.
 
 ---
 
@@ -29,7 +33,10 @@ This project provides a RESTful API for managing user authentication, blog creat
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB, Mongoose
 - **Validation**: Zod
+- **Authentication**: JWT (JSON Web Tokens)
 - **TypeScript**: Ensures type safety across the application
+- **API Documentation**:  Postman (for API testing)
+- **Error Handling**:  Custom middleware for standardized error responses
 
 ---
 
@@ -39,6 +46,9 @@ This project provides a RESTful API for managing user authentication, blog creat
 
 1. Node.js (v14 or later)
 2. MongoDB (local or cloud instance)
+3. TypeScript (v4 or later)
+4. ESLint (for linting TypeScript files)
+5. Prettier (for code formatting)
 
 ### Steps
 
