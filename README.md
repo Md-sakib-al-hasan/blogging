@@ -1,6 +1,6 @@
-# Bicycle Ordering API
+# BlogAPIBackend
 
-This project provides a RESTful API for managing bicycles, orders, and inventory for an e-commerce application. It includes features like creating orders, managing product inventory, and validating requests using Mongoose and Zod.
+This project provides a RESTful API for managing user authentication, blog creation, and administration for a blogging platform. It includes features such as user registration and login, blog creation, updating and deleting personal blogs, and administrative functions like blocking users and deleting any blog. The API supports role-based access control for Admin and User roles, secure authentication with JWT, and CRUD operations on blogs. Additionally, search, sort, and filter functionalities are included for fetching blogs, using MongoDB with Mongoose for data management and Zod for data validation.
 
 ---
 
