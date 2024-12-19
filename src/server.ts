@@ -16,12 +16,13 @@ async function main() {
     console.log(err);
   }
 }
-
+//handle uncaughtException
 process.on('uncaughtException', () => {
   console.log(`uncaughtException is detected , shutting down ...`);
   process.exit(1);
 });
 
+//handle unhandledRejection
 process.on('unhandledRejection', () => {
   console.log(` unahandledRejection is detected , shutting down ...`);
   if (server) {

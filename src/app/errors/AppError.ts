@@ -1,3 +1,4 @@
+//extract error and it modified
 class AppError extends Error {
   public statusCode: number;
 

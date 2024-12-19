@@ -17,11 +17,11 @@ app.use((0, cors_1.default)());
 //application routes
 app.use('/api', routes_1.default);
 //for testing purpose
-app.use('/', (req, res) => {
-    res.status(200).json({
-        message: 'Successfully woke server',
-    });
-});
+// app.use('/', (req, res) => {
+//   res.status(200).json({
+//     message: 'Successfully woke server',
+//   });
+// });
 // not found
 app.use(notFound_1.default);
 //globalErrorhandl

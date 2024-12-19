@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
+//create for not found route
 const notFound = (req, res, next) => {
     res.status(http_status_codes_1.default.NOT_FOUND).json({
         success: false,
