@@ -11,6 +11,7 @@ This project provides a RESTful API for managing user authentication, blog creat
 - [Installation](#installation)
 - [Environment Variables](#environment-variables)
 - [API Endpoints](#api-endpoints)
+- [Architecture](#architecture)
 
 ---
 
@@ -126,3 +127,18 @@ The application requires the following environment variables to be set in a .env
 | HTTP Method | Endpoint                                                                                       | Description                                                                                                        |
 | ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `GET`       | `/api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=60b8f42f9c2a3c9b7cbd4f18	` | Fetch blogs with advanced search, sorting, and filtering options. 
+
+
+
+---
+
+
+## Architecture
+
+- **`controllers/`**: 
+    - Contains logic for handling incoming HTTP requests, interacting with the database, and sending responses back to the client.
+  
+- **`models/`**:
+    - Mongoose models for interacting with MongoDB. Each model represents a collection in the database.
+
+
