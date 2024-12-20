@@ -8,7 +8,6 @@ const router = express.Router();
 //create user
 router.post(
   '/register',
-  // auth('admin'),
   ValidateRequest(UserValidtions.userchmeavalidations),
   UserController.createUser
 );
