@@ -136,64 +136,80 @@ The application requires the following environment variables to be set in a .env
 ## Architecture
 
 
+The project is organized into several directories to separate concerns and facilitate easy management of different parts of the application.
+
 ```bash
-/app
-├── config/
-│   ├── db.conf.js
-│   ├── app.conf.js
-│   ├── app.keys.js
-│   ├── db.keys.js
-│   ├── init.js
-├── database/
-│   ├── Redis.database.js
-│   ├── Mongo.database.js
-│   ├── init.js
-├── routes/
-│   ├── App.routes.js
-│   ├── Auth.routes.js
-│   ├── Dashboard.routes.js
-├── utils/
-│   ├── Logger.util.js
-├── middleware/
-│   ├── App.middleware.js
-│   ├── ErrorHandler.middleware.js
-│   ├── init.js
-├── models/
-│   ├── User.model.js
-├── controllers/
-│   ├── App.controller.js
-│   ├── User.controller.js
-├── helpers/
-│   ├── App.helper.js
-├── views/
-│   ├── layouts/
-│   ├── partials/
-│   ├── support/
-│   │   ├── index.ejs
-│   ├── documentation/
-│   │   ├── index.ejs
-│   ├── index.ejs
-│   ├── about.ejs
-│   ├── contact.ejs
-/public
-├── dist/
-├── images/
-│   ├── dashboard/
-│   ├── auth/
-│   ├── documentation/      
-├── sitemap.xml
-/samples
-├── .env.sample
-├── db.conf.sample
-├── app.conf.sample
-├── app.keys.sample
-/src
-├── javascript/
-├── css/
-/node_modules
-/server.js
-/package.json
-/.env
+BlogAPIBackend   
+├── src                         
+│   ├── app.ts             
+│   ├── server.ts                    
+├── app                          
+│   ├── config/                 
+│   │   ├── indext.ts          
+│   ├── builder/               
+│   │   ├── QueryBuilder.ts   
+│   ├── interface/               
+│   │   ├── error.ts   
+│   │   ├── index.ts   
+│   ├── errors/
+│   │   ├── AppError.ts     
+│   │   ├── handleCastError.ts     
+│   │   ├── handleDuplicateError.ts     
+│   │   ├── handleValidationError.ts     
+│   │   ├── handleZodError.ts    
+│   ├── routes/                 
+│   │   ├── index.ts       
+│   ├── utils/                  
+│   │   ├── sendRequestwithoutmongoosedata.ts     
+│   │   ├── sendRequest.ts     
+│   │   ├── catchAsync.ts     
+│   ├── middlewares/             
+│   │   ├── validateRequest.ts   
+│   │   ├── notFound.ts 
+│   │   ├── globalErrorhandle.ts           
+│   │   ├── auth.ts           
+│   ├── modules/                 
+│   │   ├── Admin
+│   │   │    ├── admin.Validation.ts  
+│   │   │    ├── admin.service.ts  
+│   │   │    ├── admin.route.ts  
+│   │   │    ├──  admin.controller.ts 
+│   │   ├── Auth/
+│   │   │    ├── auth.validation.ts 
+│   │   │    ├── auth.service.ts  
+│   │   │    ├── auth.route.ts  
+│   │   │    ├── auth.interface.ts
+│   │   │    ├── auth.controller.ts
+│   │   ├── Blog/
+│   │   │    ├── blog.validation.ts
+│   │   │    ├── blog.service.ts 
+│   │   │    ├── blog.route.ts  
+│   │   │    ├── blog.model.ts
+│   │   │    ├── blog.interface.ts
+│   │   │    ├── blog.controller.ts
+│   │   │    ├── blog.constant.ts
+│   │   ├── user/
+│   │   │    ├── user.validation.ts
+│   │   │    ├── user.service.ts 
+│   │   │    ├── user.route.ts  
+│   │   │    ├── user.model.ts
+│   │   │    ├── user.interface.ts
+│   │   │    ├── user.controller.ts
+│   │   │    ├── user.constant.ts
+│   │   │    ├── user.utils.ts         
+├── dist/                       
+├── node_modules/                    
+├── .gitignore                 
+├── .env                 
+├── .prettierignore            
+├── .prettierrc          
+├── eslint.config.mjs         
+├── package-lock.json        
+├── jsonpackage.json       
+├── README.md      
+├── tsconfig.json  
+├── vercel.json  
+
 ```
 
 
