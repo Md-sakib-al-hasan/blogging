@@ -92,6 +92,9 @@ The application requires the following environment variables to be set in a .env
 | NODE_ENV     | The environment (e.g., development or production).                      |
 | PORT         | Port on which the server will run (default: 5000).                      |
 | DATABASE_URL | MongoDB connection string. Replace with your actual connection details. |
+| JWT_SECRET   | Secret key used to sign and verify JWT tokens. |
+| JWT_ACCESS_EXPIRES_IN | Expiration time for access tokens (e.g., 1h, 7d). |
+| BCRYPT_SALT_ROUNDS | Number of salt rounds for bcrypt hashing (e.g., 10). |
 
 ---
 
