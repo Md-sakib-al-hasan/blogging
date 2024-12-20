@@ -61,15 +61,6 @@ userSchema.pre('save', function () {
         this.password = yield bcrypt_1.default.hash(this.password, Number(config_1.default.bcrypt_salt_rounds));
     });
 });
-//remove files in res in means  some filed is hidden
-userSchema.set('toJSON', {
-    transform: function (doc, ret) {
-        user_constant_1.userHiddenfelds.forEach((field) => {
-            delete ret[field];
-        });
-        return ret;
-    },
-});
 //instance methods for checking if passwords are matched
 userSchema.statics.isPasswordMatched = function (plainTextPassword, hashedPassword) {
     return __awaiter(this, void 0, void 0, function* () {

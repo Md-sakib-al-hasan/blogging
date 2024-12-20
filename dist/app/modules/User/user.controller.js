@@ -20,11 +20,12 @@ const http_status_codes_1 = require("http-status-codes");
 //create user
 const createUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_service_1.UserServices.createuserIntoDB(req.body);
+    const { _id, name, email } = result;
     (0, sendRequest_1.default)(res, {
         success: true,
         message: 'User registered successfully',
         statusCode: http_status_codes_1.StatusCodes.CREATED,
-        data: result,
+        data: { _id, name, email },
     });
 }));
 exports.UserController = {

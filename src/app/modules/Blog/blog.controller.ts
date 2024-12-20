@@ -24,7 +24,7 @@ const updateSingleBlog = catchAsync(async (req: Request, res: Response) => {
   sendRequest(res, {
     success: true,
     message: 'Blog updated successfully',
-    statusCode: StatusCodes.CREATED,
+    statusCode: StatusCodes.OK,
     data: result,
   });
 });

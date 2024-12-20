@@ -15,6 +15,7 @@ const BlockUser = catchAsync(async (req: Request, res: Response) => {
     statusCode: StatusCodes.OK,
   });
 });
+
 // Allows an admin to delete any blog by its ID
 const deleteSingleBLog = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;

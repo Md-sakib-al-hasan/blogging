@@ -13,27 +13,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminService = void 0;
+const http_status_codes_1 = require("http-status-codes");
+const AppError_1 = __importDefault(require("../../errors/AppError"));
 const blog_model_1 = __importDefault(require("../Blog/blog.model"));
 const user_modul_1 = __importDefault(require("../User/user.modul"));
 //Allows an admin to block a user by updating the isBlocked property to true
 const BlockuserIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     if (!id) {
-        throw new Error(`Pleace Enter id`);
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.BAD_REQUEST, `Pleace Enter id`);
+    }
+    const user = yield user_modul_1.default.findById(id);
+    if ((user === null || user === void 0 ? void 0 : user.role) !== 'user') {
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, `The user isn't exities`);
     }
     const result = yield user_modul_1.default.findByIdAndUpdate(id, { isBlocked: true });
     if (!result) {
-        throw new Error(`Blog with id ${id} not found.`);
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, `Blog with id ${id} not found.`);
     }
     return result;
 });
 //Allows an admin to delete any blog by its ID
 const deleteBLogFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     if (!id) {
-        throw new Error(`Pleace Enter id`);
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.BAD_REQUEST, `Pleace Enter id`);
     }
     const result = yield blog_model_1.default.findByIdAndDelete(id);
     if (!result) {
-        throw new Error(`Blog with id ${id} not found.`);
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, `Blog with id ${id} not found.`);
     }
     return result;
 });

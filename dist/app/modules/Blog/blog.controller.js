@@ -36,7 +36,7 @@ const updateSingleBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 
     (0, sendRequest_1.default)(res, {
         success: true,
         message: 'Blog updated successfully',
-        statusCode: http_status_codes_1.StatusCodes.CREATED,
+        statusCode: http_status_codes_1.StatusCodes.OK,
         data: result,
     });
 }));

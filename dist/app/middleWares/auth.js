@@ -25,7 +25,11 @@ const auth = (...requiredRoles) => {
         if (!token) {
             throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'You are not authorized!');
         }
-        const decoded = jsonwebtoken_1.default.verify(token, config_1.default.jwt_secret);
+        if (!token || !token.startsWith('Bearer ')) {
+            throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'You are not authorized!');
+        }
+        const [, newtoken] = token.split(' ');
+        const decoded = jsonwebtoken_1.default.verify(newtoken, config_1.default.jwt_secret);
         const { role, useremail } = decoded;
         const user = yield user_modul_1.default.isUserExistsByEmail(useremail);
         //if the user doesn't exits

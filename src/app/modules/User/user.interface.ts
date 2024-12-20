@@ -9,8 +9,6 @@ export type Tuser = {
   password: string;
   role: 'admin' | 'user';
   isBlocked: boolean;
-  createdAt: Date;
-  updatedAt: Date;
 };
 
 export interface UserModel extends Model<Tuser> {

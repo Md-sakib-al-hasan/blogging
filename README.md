@@ -111,105 +111,96 @@ The application requires the following environment variables to be set in a .env
 
 ## Blog Management
 
-| HTTP Method | Endpoint                                                                                       | Description                                                                                                        |
-| ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `POST`      | `	/api/blogs`                                                                                   | Create a new blog. Requires user authentication. Validates using BlogValidations.blogValidationSchema.             |
-| `PATCH`     | `/api/blogs/:id`                                                                               | Update a blog by its ID. Requires user authentication. Validates using BlogValidations.blogUpdateValidationSchema. |
-| `DELETE`    | `/api/blogs/:id`                                                                               | Delete a blog by its ID. Requires user authentication. Validates using BlogValidations.IdvalidationSchema.         |
-| `DELETE`    | `/api/admin/blogs/:id`                                                                         | Delete any blog by its ID. Requires admin privileges. Validates using AdminValidations.IdvalidationSchema.         |
-| `GET`       | `/api/blogs`                                                                                   | Fetch all blogs. Public API, with optional query parameters for search, sort, and filter.                          |
-
-
-
+| HTTP Method | Endpoint               | Description                                                                                                        |
+| ----------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `POST`      | `	/api/blogs`           | Create a new blog. Requires user authentication. Validates using BlogValidations.blogValidationSchema.             |
+| `PATCH`     | `/api/blogs/:id`       | Update a blog by its ID. Requires user authentication. Validates using BlogValidations.blogUpdateValidationSchema. |
+| `DELETE`    | `/api/blogs/:id`       | Delete a blog by its ID. Requires user authentication. Validates using BlogValidations.IdvalidationSchema.         |
+| `DELETE`    | `/api/admin/blogs/:id` | Delete any blog by its ID. Requires admin privileges. Validates using AdminValidations.IdvalidationSchema.         |
+| `GET`       | `/api/blogs`           | Fetch all blogs. Public API, with optional query parameters for search, sort, and filter.                          |
 
 ## Additional Example for Query Parameters
 
-| HTTP Method | Endpoint                                                                                       | Description                                                                                                        |
-| ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `GET`       | `/api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=60b8f42f9c2a3c9b7cbd4f18	` | Fetch blogs with advanced search, sorting, and filtering options. 
-
-
+| HTTP Method | Endpoint                                                                                       | Description                                                       |
+| ----------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `GET`       | `/api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=60b8f42f9c2a3c9b7cbd4f18	` | Fetch blogs with advanced search, sorting, and filtering options. |
 
 ---
 
-
 ## Architecture
-
 
 The project is organized into several directories to separate concerns and facilitate easy management of different parts of the application.
 
 ```bash
-BlogAPIBackend   
-├── src                         
-│   ├── app.ts             
-│   ├── server.ts                    
-├── app                          
-│   ├── config/                 
-│   │   ├── indext.ts          
-│   ├── builder/               
-│   │   ├── QueryBuilder.ts   
-│   ├── interface/               
-│   │   ├── error.ts   
-│   │   ├── index.ts   
+BlogAPIBackend
+├── src
+│   ├── app.ts
+│   ├── server.ts
+├── app
+│   ├── config/
+│   │   ├── indext.ts
+│   ├── builder/
+│   │   ├── QueryBuilder.ts
+│   ├── interface/
+│   │   ├── error.ts
+│   │   ├── index.ts
 │   ├── errors/
-│   │   ├── AppError.ts     
-│   │   ├── handleCastError.ts     
-│   │   ├── handleDuplicateError.ts     
-│   │   ├── handleValidationError.ts     
-│   │   ├── handleZodError.ts    
-│   ├── routes/                 
-│   │   ├── index.ts       
-│   ├── utils/                  
-│   │   ├── sendRequestwithoutmongoosedata.ts     
-│   │   ├── sendRequest.ts     
-│   │   ├── catchAsync.ts     
-│   ├── middlewares/             
-│   │   ├── validateRequest.ts   
-│   │   ├── notFound.ts 
-│   │   ├── globalErrorhandle.ts           
-│   │   ├── auth.ts           
-│   ├── modules/                 
+│   │   ├── AppError.ts
+│   │   ├── handleCastError.ts
+│   │   ├── handleDuplicateError.ts
+│   │   ├── handleValidationError.ts
+│   │   ├── handleZodError.ts
+│   ├── routes/
+│   │   ├── index.ts
+│   ├── utils/
+│   │   ├── sendRequestwithoutmongoosedata.ts
+│   │   ├── sendRequest.ts
+│   │   ├── catchAsync.ts
+│   ├── middlewares/
+│   │   ├── validateRequest.ts
+│   │   ├── notFound.ts
+│   │   ├── globalErrorhandle.ts
+│   │   ├── auth.ts
+│   ├── modules/
 │   │   ├── Admin
-│   │   │    ├── admin.Validation.ts  
-│   │   │    ├── admin.service.ts  
-│   │   │    ├── admin.route.ts  
-│   │   │    ├──  admin.controller.ts 
+│   │   │    ├── admin.Validation.ts
+│   │   │    ├── admin.service.ts
+│   │   │    ├── admin.route.ts
+│   │   │    ├──  admin.controller.ts
 │   │   ├── Auth/
-│   │   │    ├── auth.validation.ts 
-│   │   │    ├── auth.service.ts  
-│   │   │    ├── auth.route.ts  
+│   │   │    ├── auth.validation.ts
+│   │   │    ├── auth.service.ts
+│   │   │    ├── auth.route.ts
 │   │   │    ├── auth.interface.ts
 │   │   │    ├── auth.controller.ts
 │   │   ├── Blog/
 │   │   │    ├── blog.validation.ts
-│   │   │    ├── blog.service.ts 
-│   │   │    ├── blog.route.ts  
+│   │   │    ├── blog.service.ts
+│   │   │    ├── blog.route.ts
 │   │   │    ├── blog.model.ts
 │   │   │    ├── blog.interface.ts
 │   │   │    ├── blog.controller.ts
 │   │   │    ├── blog.constant.ts
 │   │   ├── user/
 │   │   │    ├── user.validation.ts
-│   │   │    ├── user.service.ts 
-│   │   │    ├── user.route.ts  
+│   │   │    ├── user.service.ts
+│   │   │    ├── user.route.ts
 │   │   │    ├── user.model.ts
 │   │   │    ├── user.interface.ts
 │   │   │    ├── user.controller.ts
 │   │   │    ├── user.constant.ts
-│   │   │    ├── user.utils.ts         
-├── dist/                       
-├── node_modules/                    
-├── .gitignore                 
-├── .env                 
-├── .prettierignore            
-├── .prettierrc          
-├── eslint.config.mjs         
-├── package-lock.json        
-├── jsonpackage.json       
-├── README.md      
-├── tsconfig.json  
-├── vercel.json  
+│   │   │    ├── user.utils.ts
+├── dist/
+├── node_modules/
+├── .gitignore
+├── .env
+├── .prettierignore
+├── .prettierrc
+├── eslint.config.mjs
+├── package-lock.json
+├── jsonpackage.json
+├── README.md
+├── tsconfig.json
+├── vercel.json
 
 ```
-
-

@@ -1,11 +1,7 @@
 import { model, Schema } from 'mongoose';
 import { Tuser, UserModel } from './user.interface';
 import bcrypt from 'bcrypt';
-import {
-  emailValidationRegex,
-  roletype,
-  userHiddenfelds,
-} from './user.constant';
+import { emailValidationRegex, roletype } from './user.constant';
 import config from '../../config';
 
 //create useshema
@@ -57,16 +53,6 @@ userSchema.pre('save', async function () {
     this.password,
     Number(config.bcrypt_salt_rounds)
   );
-});
-
-//remove files in res in means  some filed is hidden
-userSchema.set('toJSON', {
-  transform: function (doc, ret) {
-    userHiddenfelds.forEach((field) => {
-      delete ret[field];
-    });
-    return ret;
-  },
 });
 
 //instance methods for checking if passwords are matched

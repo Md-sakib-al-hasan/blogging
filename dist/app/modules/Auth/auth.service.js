@@ -23,7 +23,7 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield user_modul_1.default.isUserExistsByEmail(payload.email);
     //if the user doesn't exits
     if (!user) {
-        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, 'This user is not found !');
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'Invalid credentials');
     }
     //if the user is blocked
     if (user === null || user === void 0 ? void 0 : user.isBlocked) {
@@ -31,7 +31,7 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     }
     //match passworld
     if (!(yield user_modul_1.default.isPasswordMatched(payload === null || payload === void 0 ? void 0 : payload.password, user === null || user === void 0 ? void 0 : user.password)))
-        throw new AppError_1.default(http_status_codes_1.StatusCodes.FORBIDDEN, 'Password do not matched');
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'Invalid credentials');
     const jwtPayload = {
         useremail: user.email,
         role: user.role,

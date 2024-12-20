@@ -14,9 +14,13 @@ const auth = (...requiredRoles: TUserRole[]) => {
     if (!token) {
       throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized!');
     }
+    if (!token || !token.startsWith('Bearer ')) {
+      throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized!');
+    }
+    const [, newtoken] = token.split(' ');
 
     const decoded = jwt.verify(
-      token,
+      newtoken,
       config.jwt_secret as string
     ) as JwtPayload;
 

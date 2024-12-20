@@ -7,11 +7,12 @@ import { StatusCodes } from 'http-status-codes';
 //create user
 const createUser = catchAsync(async (req: Request, res: Response) => {
   const result = await UserServices.createuserIntoDB(req.body);
+  const { _id, name, email } = result;
   sendRequest(res, {
     success: true,
     message: 'User registered successfully',
     statusCode: StatusCodes.CREATED,
-    data: result,
+    data: { _id, name, email },
   });
 });
 

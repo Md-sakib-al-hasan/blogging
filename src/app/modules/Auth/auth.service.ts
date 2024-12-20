@@ -10,7 +10,7 @@ const loginUser = async (payload: Tlogin) => {
   const user = await User.isUserExistsByEmail(payload.email);
   //if the user doesn't exits
   if (!user) {
-    throw new AppError(StatusCodes.NOT_FOUND, 'This user is not found !');
+    throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid credentials');
   }
 
   //if the user is blocked
@@ -20,7 +20,7 @@ const loginUser = async (payload: Tlogin) => {
 
   //match passworld
   if (!(await User.isPasswordMatched(payload?.password, user?.password)))
-    throw new AppError(StatusCodes.FORBIDDEN, 'Password do not matched');
+    throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid credentials');
 
   const jwtPayload = {
     useremail: user.email,
