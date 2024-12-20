@@ -117,4 +117,12 @@ The application requires the following environment variables to be set in a .env
 | `DELETE`    | `/api/blogs/:id`                                                                               | Delete a blog by its ID. Requires user authentication. Validates using BlogValidations.IdvalidationSchema.         |
 | `DELETE`    | `/api/admin/blogs/:id`                                                                         | Delete any blog by its ID. Requires admin privileges. Validates using AdminValidations.IdvalidationSchema.         |
 | `GET`       | `/api/blogs`                                                                                   | Fetch all blogs. Public API, with optional query parameters for search, sort, and filter.                          |
-| `GET`       | `/api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=60b8f42f9c2a3c9b7cbd4f18	` | Fetch blogs with advanced search, sorting, and filtering options.                                                  |
+
+
+
+
+## Additional Example for Query Parameters
+
+| HTTP Method | Endpoint                                                                                       | Description                                                                                                        |
+| ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `GET`       | `/api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=60b8f42f9c2a3c9b7cbd4f18	` | Fetch blogs with advanced search, sorting, and filtering options. 
