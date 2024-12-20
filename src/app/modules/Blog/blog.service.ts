@@ -43,7 +43,7 @@ const deletedSingleBlogIntoDB = async (id: string) => {
 };
 //get all blog from databse
 const getallBlogfromDB = async (query: Record<string, unknown>) => {
-  const Blogquery = new QueryBuilder(Blog.find(), query)
+  const Blogquery = new QueryBuilder(Blog.find().populate('author'), query)
     .search(['title', 'content'])
     .filter()
     .sort();

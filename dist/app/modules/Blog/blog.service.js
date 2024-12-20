@@ -54,7 +54,7 @@ const deletedSingleBlogIntoDB = (id) => __awaiter(void 0, void 0, void 0, functi
 });
 //get all blog from databse
 const getallBlogfromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    const Blogquery = new QueryBuilder_1.default(blog_model_1.default.find(), query)
+    const Blogquery = new QueryBuilder_1.default(blog_model_1.default.find().populate('author'), query)
         .search(['title', 'content'])
         .filter()
         .sort();
