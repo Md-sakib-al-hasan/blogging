@@ -7,6 +7,7 @@ const ValidateRequest = (schma: AnyZodObject) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     await schma.parseAsync({
       body: req.body,
+      params: req.params,
     });
 
     next();

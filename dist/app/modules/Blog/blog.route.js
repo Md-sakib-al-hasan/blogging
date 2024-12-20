@@ -15,7 +15,7 @@ router.post('/', (0, auth_1.default)('user'), (0, validateRequest_1.default)(blo
 //update blog by user
 router.patch('/:id', (0, auth_1.default)('user'), (0, validateRequest_1.default)(blog_validation_1.BlogValidtions.blogUpdateValidationSchema), blog_controller_1.BlogController.updateSingleBlog);
 //get blog by user
-router.delete('/:id', (0, auth_1.default)('user'), blog_controller_1.BlogController.deleteSingleBlog);
+router.delete('/:id', (0, auth_1.default)('user'), (0, validateRequest_1.default)(blog_validation_1.BlogValidtions.IdvalidationSchema), blog_controller_1.BlogController.deleteSingleBlog);
 //get all blog it is public api
 router.get('/', blog_controller_1.BlogController.getallBlog);
 exports.BlogRoutes = router;

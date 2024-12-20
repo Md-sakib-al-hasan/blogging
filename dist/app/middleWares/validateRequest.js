@@ -18,6 +18,7 @@ const ValidateRequest = (schma) => {
     return (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         yield schma.parseAsync({
             body: req.body,
+            params: req.params,
         });
         next();
     }));

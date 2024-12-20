@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { z } from 'zod';
 
 // Define Zod validation for the Blog schema
@@ -43,7 +44,21 @@ const blogUpdateValidationSchema = z.object({
   }),
 });
 
+// Custom Zod refinement for MongoDB ObjectId
+const objectIdSchema = z
+  .string()
+  .refine((value) => Types.ObjectId.isValid(value), {
+    message: 'Invalid MongoDB ObjectId',
+  });
+
+const IdvalidationSchema = z.object({
+  params: z.object({
+    id: objectIdSchema,
+  }),
+});
+
 export const BlogValidtions = {
   blogValidationSchema,
   blogUpdateValidationSchema,
+  IdvalidationSchema,
 };

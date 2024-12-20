@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogValidtions = exports.blogValidationSchema = void 0;
+const mongoose_1 = require("mongoose");
 const zod_1 = require("zod");
 // Define Zod validation for the Blog schema
 exports.blogValidationSchema = zod_1.z.object({
@@ -40,7 +41,19 @@ const blogUpdateValidationSchema = zod_1.z.object({
             .optional(),
     }),
 });
+// Custom Zod refinement for MongoDB ObjectId
+const objectIdSchema = zod_1.z
+    .string()
+    .refine((value) => mongoose_1.Types.ObjectId.isValid(value), {
+    message: 'Invalid MongoDB ObjectId',
+});
+const IdvalidationSchema = zod_1.z.object({
+    params: zod_1.z.object({
+        id: objectIdSchema,
+    }),
+});
 exports.BlogValidtions = {
     blogValidationSchema: exports.blogValidationSchema,
     blogUpdateValidationSchema,
+    IdvalidationSchema,
 };
