@@ -7,9 +7,11 @@ exports.AdminRouters = void 0;
 const express_1 = __importDefault(require("express"));
 const auth_1 = __importDefault(require("../../middleWares/auth"));
 const admin_controller_1 = require("./admin.controller");
+const validateRequest_1 = __importDefault(require("../../middleWares/validateRequest"));
+const admin_Validation_1 = require("./admin.Validation");
 const router = express_1.default.Router();
 // Allows an admin to block a user by updating the isBlocked property to true
-router.patch('/users/:userId/block', (0, auth_1.default)('admin'), admin_controller_1.AdminController.BlockUser);
+router.patch('/users/:userId/block', (0, validateRequest_1.default)(admin_Validation_1.AdminValidations.userBlockIdvalidationSchema), (0, auth_1.default)('admin'), admin_controller_1.AdminController.BlockUser);
 // Allows an admin to delete any blog by its ID
-router.delete('/blogs/:id', (0, auth_1.default)('admin'), admin_controller_1.AdminController.deleteSingleBLog);
+router.delete('/blogs/:id', (0, auth_1.default)('admin'), (0, validateRequest_1.default)(admin_Validation_1.AdminValidations.IdvalidationSchema), admin_controller_1.AdminController.deleteSingleBLog);
 exports.AdminRouters = router;

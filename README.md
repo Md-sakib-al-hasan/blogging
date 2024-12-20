@@ -87,31 +87,34 @@ This project provides a RESTful API for managing user authentication, blog creat
 
 The application requires the following environment variables to be set in a .env file:
 
-| Variable     | Description                                                             |
-| ------------ | ----------------------------------------------------------------------- |
-| NODE_ENV     | The environment (e.g., development or production).                      |
-| PORT         | Port on which the server will run (default: 5000).                      |
-| DATABASE_URL | MongoDB connection string. Replace with your actual connection details. |
-| JWT_SECRET   | Secret key used to sign and verify JWT tokens. |
-| JWT_ACCESS_EXPIRES_IN | Expiration time for access tokens (e.g., 1h, 7d). |
-| BCRYPT_SALT_ROUNDS | Number of salt rounds for bcrypt hashing (e.g., 10). |
+| Variable              | Description                                                             |
+| --------------------- | ----------------------------------------------------------------------- |
+| NODE_ENV              | The environment (e.g., development or production).                      |
+| PORT                  | Port on which the server will run (default: 5000).                      |
+| DATABASE_URL          | MongoDB connection string. Replace with your actual connection details. |
+| JWT_SECRET            | Secret key used to sign and verify JWT tokens.                          |
+| JWT_ACCESS_EXPIRES_IN | Expiration time for access tokens (e.g., 1h, 7d).                       |
+| BCRYPT_SALT_ROUNDS    | Number of salt rounds for bcrypt hashing (e.g., 10).                    |
 
 ---
 
 # API Endpoints
 
-## Product Management
+## User Management
 
-| HTTP Method | Endpoint                        | Description                            |
-| ----------- | ------------------------------- | -------------------------------------- |
-| `GET`       | `/api/products?searchTerm=type` | Fetch products based on type,name,bran |
-| `POST`      | `/api/products`                 | Create a new product                   |
-| `PUT`       | `/api/products/:id`             | Update a product                       |
-| `DELETE`    | `/api/products/:id`             | Delete a product                       |
+| HTTP Method | Endpoint                         | Description                                                                         |
+| ----------- | -------------------------------- | ----------------------------------------------------------------------------------- |
+| `POST`      | `/api/auth/register`             | Register a new user. Validates request using UserValidations.userchmeavalidations.  |
+| `POST`      | `/api/auth/login`                | Log in a user. Validates request using AuthValidation.loginValidationSchema.        |
+| `PATCH`     | `/api/admin/users/:userId/block` | Block a user by updating the isBlocked property to true. Requires admin privileges. |
 
-## Order Management
+## Blog Management
 
-| HTTP Method | Endpoint              | Description                   |
-| ----------- | --------------------- | ----------------------------- |
-| `POST`      | `/api/orders`         | Place an order                |
-| `GET`       | `/api/orders/revenue` | Calculate Revenue from Orders |
+| HTTP Method | Endpoint                                                                                       | Description                                                                                                        |
+| ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `POST`      | `	/api/blogs`                                                                                   | Create a new blog. Requires user authentication. Validates using BlogValidations.blogValidationSchema.             |
+| `PATCH`     | `/api/blogs/:id`                                                                               | Update a blog by its ID. Requires user authentication. Validates using BlogValidations.blogUpdateValidationSchema. |
+| `DELETE`    | `/api/blogs/:id`                                                                               | Delete a blog by its ID. Requires user authentication. Validates using BlogValidations.IdvalidationSchema.         |
+| `DELETE`    | `/api/admin/blogs/:id`                                                                         | Delete any blog by its ID. Requires admin privileges. Validates using AdminValidations.IdvalidationSchema.         |
+| `GET`       | `/api/blogs`                                                                                   | Fetch all blogs. Public API, with optional query parameters for search, sort, and filter.                          |
+| `GET`       | `/api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=60b8f42f9c2a3c9b7cbd4f18	` | Fetch blogs with advanced search, sorting, and filtering options.                                                  |

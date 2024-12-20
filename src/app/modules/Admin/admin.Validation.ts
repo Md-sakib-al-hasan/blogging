@@ -1,6 +1,5 @@
-import { Types } from "mongoose";
-import { z } from "zod";
-
+import { Types } from 'mongoose';
+import { z } from 'zod';
 
 // Custom Zod refinement for MongoDB ObjectId
 const objectIdSchema = z
@@ -21,6 +20,6 @@ const userBlockIdvalidationSchema = z.object({
 });
 
 export const AdminValidations = {
-    IdvalidationSchema,
-    userBlockIdvalidationSchema,
-}
+  IdvalidationSchema,
+  userBlockIdvalidationSchema,
+};
