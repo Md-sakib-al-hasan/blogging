@@ -30,27 +30,29 @@ const createBlogIntoDB = (payload, useremail) => __awaiter(void 0, void 0, void 
     return result;
 });
 //update Blog into the database
-const updateSingleBlogIntoDB = (payload, id) => __awaiter(void 0, void 0, void 0, function* () {
+const updateSingleBlogIntoDB = (payload, id, useremail) => __awaiter(void 0, void 0, void 0, function* () {
     if (!id) {
         throw new Error(`Pleace Enter id`);
+    }
+    const issameuser = yield blog_model_1.default.isOwnUser(useremail, id);
+    if (!issameuser) {
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'Your are not authorize user');
     }
     const result = yield blog_model_1.default.findByIdAndUpdate(id, payload, {
         new: true,
     }).populate('author');
-    if (!result) {
-        throw new Error(`Blog with id ${id} not found.`);
-    }
     return result;
 });
 //delete blog by user into the database
-const deletedSingleBlogIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+const deletedSingleBlogIntoDB = (id, useremail) => __awaiter(void 0, void 0, void 0, function* () {
     if (!id) {
         throw new Error(`Pleace Enter id`);
     }
-    const result = yield blog_model_1.default.findByIdAndDelete(id);
-    if (!result) {
-        throw new Error(`Blog with id ${id} not found.`);
+    const issameuser = yield blog_model_1.default.isOwnUser(useremail, id);
+    if (!issameuser) {
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'Your are not authorize user');
     }
+    const result = yield blog_model_1.default.findByIdAndDelete(id);
     return result;
 });
 //get all blog from databse

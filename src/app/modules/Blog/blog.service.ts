@@ -19,27 +19,39 @@ const createBlogIntoDB = async (payload: Partial<Tblog>, useremail: string) => {
   return result;
 };
 //update Blog into the database
-const updateSingleBlogIntoDB = async (payload: Partial<Tblog>, id: string) => {
+const updateSingleBlogIntoDB = async (
+  payload: Partial<Tblog>,
+  id: string,
+  useremail: string
+) => {
   if (!id) {
     throw new Error(`Pleace Enter id`);
   }
+  const issameuser = await Blog.isOwnUser(useremail, id);
+
+  if (!issameuser) {
+    throw new AppError(StatusCodes.UNAUTHORIZED, 'Your are not authorize user');
+  }
+
   const result = await Blog.findByIdAndUpdate(id, payload, {
     new: true,
   }).populate('author');
-  if (!result) {
-    throw new Error(`Blog with id ${id} not found.`);
-  }
   return result;
 };
 //delete blog by user into the database
-const deletedSingleBlogIntoDB = async (id: string) => {
+const deletedSingleBlogIntoDB = async (id: string, useremail: string) => {
   if (!id) {
     throw new Error(`Pleace Enter id`);
   }
-  const result = await Blog.findByIdAndDelete(id);
-  if (!result) {
-    throw new Error(`Blog with id ${id} not found.`);
+
+  const issameuser = await Blog.isOwnUser(useremail, id);
+
+  if (!issameuser) {
+    throw new AppError(StatusCodes.UNAUTHORIZED, 'Your are not authorize user');
   }
+
+  const result = await Blog.findByIdAndDelete(id);
+
   return result;
 };
 //get all blog from databse

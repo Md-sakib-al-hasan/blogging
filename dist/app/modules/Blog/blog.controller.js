@@ -32,7 +32,8 @@ const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 //update blog with token and info
 const updateSingleBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const result = yield blog_service_1.BlogServices.updateSingleBlogIntoDB(req.body, id);
+    const { useremail } = req.user;
+    const result = yield blog_service_1.BlogServices.updateSingleBlogIntoDB(req.body, id, useremail);
     (0, sendRequest_1.default)(res, {
         success: true,
         message: 'Blog updated successfully',
@@ -43,7 +44,8 @@ const updateSingleBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 
 //deleted Blog by user
 const deleteSingleBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    yield blog_service_1.BlogServices.deletedSingleBlogIntoDB(id);
+    const { useremail } = req.user;
+    yield blog_service_1.BlogServices.deletedSingleBlogIntoDB(id, useremail);
     (0, sendRequestwithoutmongoosedata_1.default)(res, {
         success: true,
         message: 'Blog deleted successfully',

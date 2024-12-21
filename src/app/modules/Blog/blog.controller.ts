@@ -20,7 +20,12 @@ const createBlog = catchAsync(async (req: Request, res: Response) => {
 //update blog with token and info
 const updateSingleBlog = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await BlogServices.updateSingleBlogIntoDB(req.body, id);
+  const { useremail } = req.user as JwtPayload;
+  const result = await BlogServices.updateSingleBlogIntoDB(
+    req.body,
+    id,
+    useremail
+  );
   sendRequest(res, {
     success: true,
     message: 'Blog updated successfully',
@@ -32,7 +37,8 @@ const updateSingleBlog = catchAsync(async (req: Request, res: Response) => {
 //deleted Blog by user
 const deleteSingleBlog = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  await BlogServices.deletedSingleBlogIntoDB(id);
+  const { useremail } = req.user as JwtPayload;
+  await BlogServices.deletedSingleBlogIntoDB(id, useremail);
 
   sendRequestWithData(res, {
     success: true,

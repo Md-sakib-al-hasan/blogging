@@ -1,9 +1,11 @@
 import { Schema, model } from 'mongoose';
-import { Tblog } from './blog.interface';
+import { BlogModel, Tblog } from './blog.interface';
 import { BlogHiddenfelds } from './blog.constant';
+import AppError from '../../errors/AppError';
+import { StatusCodes } from 'http-status-codes';
 
 // create blogSchema for blog
-const blogSchema = new Schema<Tblog>(
+const blogSchema = new Schema<Tblog, BlogModel>(
   {
     title: {
       type: String,
@@ -29,6 +31,22 @@ const blogSchema = new Schema<Tblog>(
   }
 );
 
+// is same user access
+blogSchema.statics.isOwnUser = async function (email: string, id: string) {
+  const user = await this.findById(id)
+    .select('author')
+    .populate<{ author: { email: string } }>('author', 'email -_id');
+
+  if (!user) {
+    throw new AppError(StatusCodes.NOT_FOUND, `Blog with id ${id} not found.`);
+  }
+
+  if (user && user.author && user.author.email === email) {
+    return true;
+  }
+  return false;
+};
+
 //remove files in res in means  some filed is hidden
 blogSchema.set('toJSON', {
   transform: function (doc, ret) {
@@ -40,6 +58,6 @@ blogSchema.set('toJSON', {
 });
 
 // Create and export the Blog model
-const Blog = model<Tblog>('Blog', blogSchema);
+const Blog = model<Tblog, BlogModel>('Blog', blogSchema);
 
 export default Blog;
