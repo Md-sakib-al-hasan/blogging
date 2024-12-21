@@ -57,7 +57,7 @@ const getallBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     const result = yield blog_service_1.BlogServices.getallBlogfromDB(req.query);
     (0, sendRequest_1.default)(res, {
         success: true,
-        message: 'Blog updated successfully',
+        message: 'Blogs fetched successfully',
         statusCode: http_status_codes_1.StatusCodes.CREATED,
         data: result,
     });

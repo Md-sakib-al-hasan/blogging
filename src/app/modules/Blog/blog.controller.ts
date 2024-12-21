@@ -52,7 +52,7 @@ const getallBlog = catchAsync(async (req: Request, res: Response) => {
   const result = await BlogServices.getallBlogfromDB(req.query);
   sendRequest(res, {
     success: true,
-    message: 'Blog updated successfully',
+    message: 'Blogs fetched successfully',
     statusCode: StatusCodes.CREATED,
     data: result,
   });
