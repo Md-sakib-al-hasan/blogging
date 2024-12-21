@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
 //queryBuilder create for search, sort and filter
 class QueryBuilder {
     constructor(modelQuery, query) {
@@ -33,17 +29,6 @@ class QueryBuilder {
             sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortBy}`;
         }
         this.modelQuery = this.modelQuery.sort(sortStr);
-        return this;
-    }
-    //filter
-    filter() {
-        var _a;
-        const filter = (_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.filter;
-        if (filter) {
-            this.modelQuery = this.modelQuery.find({
-                _id: new mongoose_1.default.Types.ObjectId(filter),
-            });
-        }
         return this;
     }
 }

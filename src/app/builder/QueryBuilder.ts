@@ -1,4 +1,4 @@
-import  { FilterQuery, Query } from 'mongoose';
+import { FilterQuery, Query } from 'mongoose';
 
 //queryBuilder create for search, sort and filter
 class QueryBuilder<T> {
