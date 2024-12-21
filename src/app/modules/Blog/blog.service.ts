@@ -59,12 +59,12 @@ const getallBlogfromDB = async (query: Record<string, unknown>) => {
   const Blogquery = new QueryBuilder(Blog.find().populate('author'), query)
     .search(['title', 'content'])
     .sort();
-
   let result = await Blogquery.modelQuery;
   if (query?.filter) {
-    result = result.filter(
-      (item) =>
-        item.author._id === new mongoose.Types.ObjectId(query?.filter as string)
+    result = result.filter((item) =>
+      item.author._id.equals(
+        new mongoose.Types.ObjectId(query?.filter as string)
+      )
     );
   }
 

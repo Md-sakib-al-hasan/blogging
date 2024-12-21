@@ -62,7 +62,7 @@ const getallBlogfromDB = (query) => __awaiter(void 0, void 0, void 0, function* 
         .sort();
     let result = yield Blogquery.modelQuery;
     if (query === null || query === void 0 ? void 0 : query.filter) {
-        result = result.filter((item) => item.author._id === new mongoose_1.default.Types.ObjectId(query === null || query === void 0 ? void 0 : query.filter));
+        result = result.filter((item) => item.author._id.equals(new mongoose_1.default.Types.ObjectId(query === null || query === void 0 ? void 0 : query.filter)));
     }
     return result;
 });

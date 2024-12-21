@@ -8,7 +8,8 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier . --write",
-    "dev": " npm run lint && npm run format && tsc && ts-node-dev --respawn --transpile-only ./src/server.ts"
+    "build": "npm run lint && npm run format && tsc",
+    "dev": " ts-node-dev --respawn --transpile-only ./src/server.ts"
   },
   "author": "",
   "license": "ISC",
