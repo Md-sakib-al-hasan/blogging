@@ -31,16 +31,5 @@ class QueryBuilder {
         this.modelQuery = this.modelQuery.sort(sortStr);
         return this;
     }
-    //filter
-    filter() {
-        var _a;
-        const filter = (_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.filter;
-        if (filter) {
-            this.modelQuery = this.modelQuery.find({
-                author: filter, // Use the filter directly
-            });
-        }
-        return this;
-    }
 }
 exports.default = QueryBuilder;

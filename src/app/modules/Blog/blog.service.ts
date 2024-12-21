@@ -4,6 +4,7 @@ import AppError from '../../errors/AppError';
 import { StatusCodes } from 'http-status-codes';
 import Blog from './blog.model';
 import QueryBuilder from '../../builder/QueryBuilder';
+import mongoose from 'mongoose';
 
 //create Blog into the database
 const createBlogIntoDB = async (payload: Partial<Tblog>, useremail: string) => {
@@ -60,9 +61,15 @@ const deletedSingleBlogIntoDB = async (id: string, useremail: string) => {
 const getallBlogfromDB = async (query: Record<string, unknown>) => {
   const Blogquery = new QueryBuilder(Blog.find().populate('author'), query)
     .search(['title', 'content'])
-    .filter()
     .sort();
-  const result = await Blogquery.modelQuery;
+  let result = await Blogquery.modelQuery;
+  if (query?.filter) {
+    result = result.filter((item) =>
+      item.author._id.equals(
+        new mongoose.Types.ObjectId(query?.filter as string)
+      )
+    );
+  }
 
   return result;
 };

@@ -18,6 +18,7 @@ const AppError_1 = __importDefault(require("../../errors/AppError"));
 const http_status_codes_1 = require("http-status-codes");
 const blog_model_1 = __importDefault(require("./blog.model"));
 const QueryBuilder_1 = __importDefault(require("../../builder/QueryBuilder"));
+const mongoose_1 = __importDefault(require("mongoose"));
 //create Blog into the database
 const createBlogIntoDB = (payload, useremail) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield user_modul_1.default.findOne({ email: useremail }).select('_id');
@@ -58,9 +59,11 @@ const deletedSingleBlogIntoDB = (id, useremail) => __awaiter(void 0, void 0, voi
 const getallBlogfromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const Blogquery = new QueryBuilder_1.default(blog_model_1.default.find().populate('author'), query)
         .search(['title', 'content'])
-        .filter()
         .sort();
-    const result = yield Blogquery.modelQuery;
+    let result = yield Blogquery.modelQuery;
+    if (query === null || query === void 0 ? void 0 : query.filter) {
+        result = result.filter((item) => item.author._id.equals(new mongoose_1.default.Types.ObjectId(query === null || query === void 0 ? void 0 : query.filter)));
+    }
     return result;
 });
 exports.BlogServices = {
