@@ -56,21 +56,18 @@ const deletedSingleBlogIntoDB = async (id: string, useremail: string) => {
 };
 //get all blog from databse
 const getallBlogfromDB = async (query: Record<string, unknown>) => {
-  const Blogquery = new QueryBuilder(
-    Blog.find().populate({
-      path: 'author',
-      ...(query?.filter
-        ? {
-            match: { _id: new mongoose.Types.ObjectId(query.filter as string) },
-          }
-        : {}),
-    }),
-    query
-  )
+  const Blogquery = new QueryBuilder(Blog.find().populate('author'), query)
     .search(['title', 'content'])
     .sort();
 
-  const result = await Blogquery.modelQuery;
+  let result = await Blogquery.modelQuery;
+  if (query?.filter) {
+    result = result.filter(
+      (item) =>
+        item.author._id === new mongoose.Types.ObjectId(query?.filter as string)
+    );
+  }
+
   return result;
 };
 

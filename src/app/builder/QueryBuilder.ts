@@ -32,7 +32,7 @@ class QueryBuilder<T> {
       const sortOrder = this?.query?.sortOrder;
       sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortBy}`;
     }
-
+    console.log(sortStr);
     this.modelQuery = this.modelQuery.sort(sortStr as string);
 
     return this;

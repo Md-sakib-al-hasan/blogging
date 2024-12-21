@@ -57,14 +57,13 @@ const deletedSingleBlogIntoDB = (id, useremail) => __awaiter(void 0, void 0, voi
 });
 //get all blog from databse
 const getallBlogfromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    const Blogquery = new QueryBuilder_1.default(blog_model_1.default.find().populate(Object.assign({ path: 'author' }, ((query === null || query === void 0 ? void 0 : query.filter)
-        ? {
-            match: { _id: new mongoose_1.default.Types.ObjectId(query.filter) },
-        }
-        : {}))), query)
+    const Blogquery = new QueryBuilder_1.default(blog_model_1.default.find().populate('author'), query)
         .search(['title', 'content'])
         .sort();
-    const result = yield Blogquery.modelQuery;
+    let result = yield Blogquery.modelQuery;
+    if (query === null || query === void 0 ? void 0 : query.filter) {
+        result = result.filter((item) => item.author._id === new mongoose_1.default.Types.ObjectId(query === null || query === void 0 ? void 0 : query.filter));
+    }
     return result;
 });
 exports.BlogServices = {

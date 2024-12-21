@@ -28,6 +28,7 @@ class QueryBuilder {
             const sortOrder = (_d = this === null || this === void 0 ? void 0 : this.query) === null || _d === void 0 ? void 0 : _d.sortOrder;
             sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortBy}`;
         }
+        console.log(sortStr);
         this.modelQuery = this.modelQuery.sort(sortStr);
         return this;
     }
