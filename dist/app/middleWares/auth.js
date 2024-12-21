@@ -42,7 +42,7 @@ const auth = (...requiredRoles) => {
         }
         //authorized user or admin authorisation
         if (requiredRoles && !requiredRoles.includes(role)) {
-            throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'You are not authorized  hi!');
+            throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'You are not authorized  !');
         }
         req.user = decoded;
         next();

@@ -38,10 +38,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     }
     //authorized user or admin authorisation
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(
-        StatusCodes.UNAUTHORIZED,
-        'You are not authorized  hi!'
-      );
+      throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized  !');
     }
     req.user = decoded as JwtPayload;
 
