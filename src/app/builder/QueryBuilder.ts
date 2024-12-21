@@ -42,7 +42,7 @@ class QueryBuilder<T> {
     const filter = this?.query?.filter;
     if (filter) {
       this.modelQuery = this.modelQuery.find({
-        author: { $match: filter },
+        author: filter, // Use the filter directly
       });
     }
 
