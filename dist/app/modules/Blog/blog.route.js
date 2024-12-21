@@ -17,5 +17,6 @@ router.patch('/:id', (0, auth_1.default)('user'), (0, validateRequest_1.default)
 //get blog by user
 router.delete('/:id', (0, auth_1.default)('user'), (0, validateRequest_1.default)(blog_validation_1.BlogValidtions.IdvalidationSchema), blog_controller_1.BlogController.deleteSingleBlog);
 //get all blog it is public api
+//it is a public Api
 router.get('/', blog_controller_1.BlogController.getallBlog);
 exports.BlogRoutes = router;

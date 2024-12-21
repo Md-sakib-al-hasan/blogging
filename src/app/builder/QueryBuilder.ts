@@ -38,16 +38,16 @@ class QueryBuilder<T> {
     return this;
   }
   //filter
-  // filter() {
-  //   const filter = this?.query?.filter;
-  //   if (filter) {
-  //     this.modelQuery = this.modelQuery.find({
-  //     "author._id": new mongoose.Types.ObjectId(filter as string),
-  //     });
-  //   }
+  filter() {
+    const filter = this?.query?.filter;
+    if (filter) {
+      this.modelQuery = this.modelQuery.find({
+        author: { $match: filter },
+      });
+    }
 
-  //   return this;
-  // }
+    return this;
+  }
 }
 
 export default QueryBuilder;
