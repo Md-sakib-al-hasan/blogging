@@ -4,7 +4,7 @@ import sendRequest from '../../utils/sendRequest';
 import { AuthServices } from './auth.service';
 import config from '../../config';
 
-//login with email and passwolrd
+//login with email and passwolrd   
 const loginUser = catchAsync(async (req, res) => {
   const result = await AuthServices.loginUser(req.body);
   res.cookie('accesstoken', result, {

@@ -30,6 +30,7 @@ router.delete(
 );
 
 //get all blog it is public api
+//it is a public Api
 router.get('/', BlogController.getallBlog);
 
 export const BlogRoutes = router;
